@@ -1,0 +1,16 @@
+{
+  "name": "parcel-typescript-react",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.2.2"
+  },
+  "scripts": {
+    "start": "parcel index.html --open"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
