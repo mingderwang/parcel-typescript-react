@@ -1,9 +1,8 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
  
-function App() {
+const useHackerNewsApi = () => {
   const [data, setData] = useState({ hits: [] });
-  const [query, setQuery] = useState('redux');
   const [url, setUrl] = useState(
     'https://hn.algolia.com/api/v1/search?query=redux',
   );
@@ -29,10 +28,18 @@ function App() {
     fetchData();
   }, [url]);
  
+  return [{ data, isLoading, isError }, setUrl];
+}
+
+function App() {
+  const [data, setData] = useState({ hits: [] });
+  const [{ data, isLoading, isError }, doFetch] = useHackerNewsApi();
+  const [query, setQuery] = useState('redux');
+ 
   return (
     <Fragment>
       <form onSubmit={event => {
-        setUrl(`http://hn.algolia.com/api/v1/search?query=${query}`);
+        doFetch(`http://hn.algolia.com/api/v1/search?query=${query}`);
  
         event.preventDefault();
       }}>
@@ -43,20 +50,13 @@ function App() {
         />
         <button type="submit">Search</button>
       </form>
-
-      {isError && <div>Something went wrong ...</div>}
-
-      {isLoading ? (
-        <div>Loading ...</div>
-      ) : (
-        <ul>
-          {data.hits.map(item => (
-            <li key={item.objectID}>
-              <a href={item.url}>{item.title}</a>
-            </li>
-          ))}
-        </ul>
-      )}
+      <ul>
+        {data.hits.map(item => (
+          <li key={item.objectID}>
+            <a href={item.url}>{item.title}</a>
+          </li>
+        ))}
+      </ul>
     </Fragment>
   );
 }
