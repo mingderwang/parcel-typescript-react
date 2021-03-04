@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios'
 
-export const useHackerNewsApi = () => {
+const useHackerNewsApi = () => {
   const [data, setData] = useState({ hits: [] });
   const [url, setUrl] = useState(
     'https://hn.algolia.com/api/v1/search?query=redux',
@@ -30,3 +30,5 @@ export const useHackerNewsApi = () => {
  
   return [{ data, isLoading, isError }, setUrl];
 }
+
+export default useHackerNewsApi;
