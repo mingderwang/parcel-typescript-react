@@ -7,7 +7,10 @@
     "typescript": "^4.2.2"
   },
   "scripts": {
-    "start": "parcel index.html --open"
+    "clean": "rm -r dist .cache",
+    "start": "parcel index.html --open",
+    "watch": "parcel watch index.html",
+    "build": "parcel build index.html"
   },
   "dependencies": {
     "axios": "^0.21.1",
